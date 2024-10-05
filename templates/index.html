@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block name%}
+
+<div class="container px-4 py-5" id="featured-3" bis_skin_checked="1">
+    <h2 class="pb-2 border-bottom">Flask File Handling</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3" bis_skin_checked="1">
+      <div class="feature col " bis_skin_checked="1">
+
+        <h3 class="fs-2 text-body-emphasis">File Viewer</h3>
+        <p>Uploads any execel file or txt file and shows it on html page.</p>
+        <form action="{{url_for('file')}}" method="post" enctype="multipart/form-data" class="pt-2" >
+        <input type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/plain" required>
+        <br>
+        <button type="submit" class="btn btn-primary rounded-pill px-3 mt-3">View</button>
+    </form>
+      </div>
+
+      <div class="feature col" bis_skin_checked="1">
+
+        <h3 class="fs-2 text-body-emphasis">File Downloader </h3>
+        <p>Uploads the file and after that you can download it</p>
+        <form action="{{url_for('convert_csv_2')}}" method="post" enctype="multipart/form-data" class="pt-2">
+        <input type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/plain" required>
+        <br>
+        <button type="submit" class="btn btn-primary rounded-pill px-3 mt-3">Upload</button>
+    </form>
+      </div>
+
+        <div class="feature col" bis_skin_checked="1">
+
+        <h3 class="fs-2 text-body-emphasis">JS POST Resquest</h3>
+        <p>Sends the javascript post request and saves the resultant file in directory</p>
+        <button id="post_button" class="btn btn-primary rounded-pill px-3 mt-5">Send POST Request</button>
+        <script type="text/javascript">
+            const postButton = document.getElementById('post_button');
+            const jsonData = {name: 'Paramvir',greeting: 'Hello'}
+
+            postButton.addEventListener('click',() => {
+            fetch('{{url_for("handle_post")}}',{
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json; charset=utf-8'},body: JSON.stringify(jsonData)})
+
+            .then(response => response.json())
+            .then(data => console.log('Success:',data))
+            .catch((error) => {console.error('Error:', error)
+            });
+            });
+        </script>
+      </div>
+    </div>
+  </div>
+{%endblock%}

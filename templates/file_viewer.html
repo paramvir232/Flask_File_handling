@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block name%}
+<div class="container px-4 py-5" id="featured-3" bis_skin_checked="1">
+     <h2 class="pb-2 border-bottom">File Viewer</h2>
+     {% if ext=='txt'%}
+          <pre>{{content}}</pre>
+     {% else %}
+          <div class="table-responsive">
+                {{ content | safe }}
+            </div>
+     {% endif %}
+</div>
+{%endblock%}
